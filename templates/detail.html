@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ product.name }} - 技術規格 | 羅技 G PRO</title>
+  <style>
+    :root {
+      --bg-black: #050505;
+      --card-bg: #121212;
+      --border-gray: #262626;
+      --g-cyan: #00b8fc;
+      --text-white: #ffffff;
+      --text-muted: #8e8e93;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-black);
+      color: var(--text-white);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 40px 20px 80px;
+    }
+    .wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 30px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--g-cyan); }
+
+    .stage {
+      background: var(--card-bg);
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .stage-img {
+      width: 100%;
+      height: 480px;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stage-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .hero-info {
+      padding: 40px;
+      border-bottom: 1px solid var(--border-gray);
+    }
+    .badge {
+      color: var(--g-cyan);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 38px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .tagline {
+      font-size: 18px;
+      color: #d1d1d6;
+      margin-bottom: 16px;
+    }
+    .desc {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* 特性與規格區塊 */
+    .section-block {
+      background: var(--card-bg);
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 40px;
+      margin-bottom: 32px;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: var(--text-white);
+      border-bottom: 1px solid var(--border-gray);
+      padding-bottom: 12px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .feature-item {
+      background: #181818;
+      padding: 16px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #e5e5ea;
+      border-left: 3px solid var(--g-cyan);
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .spec-table th, .spec-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #1f1f1f;
+      text-align: left;
+    }
+    .spec-table th {
+      width: 35%;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .spec-table td {
+      color: var(--text-white);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <a href="/" class="back-link">← 返回 PRO 系列一覽</a>
+
+    <div class="stage">
+      <div class="stage-img">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+      </div>
+      <div class="hero-info">
+        <div class="badge">LOGITECH G PRO SERIES</div>
+        <h1>{{ product.name }}</h1>
+        <div class="tagline">{{ product.tagline }}</div>
+        <p class="desc">{{ product.description }}</p>
+      </div>
+    </div>
+
+    {% if product.features %}
+    <div class="section-block">
+      <h2 class="section-title">核心致勝技術</h2>
+      <div class="feature-grid">
+        {% for feat in product.features %}
+          <div class="feature-item">{{ feat }}</div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if product.specs %}
+    <div class="section-block">
+      <h2 class="section-title">詳細技術規格</h2>
+      <table class="spec-table">
+        <tbody>
+          {% for key, val in product.specs.items() %}
+          <tr>
+            <th>{{ key }}</th>
+            <td>{{ val }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </div>
+
+</body>
+</html>
