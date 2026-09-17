@@ -4,9 +4,9 @@ from supabase import create_client, Client
 
 app = Flask(__name__)
 
-# 從 Render 環境變數讀取金鑰
-SUPABASE_URL = os.environ.get("https://hkgvyjluqhnvwhjgjlza.supabase.co")
-SUPABASE_KEY = os.environ.get("sb_publishable_jTGKCg5Fd3rm1w9GYZ9USw_0N5EZNVe")
+# 優先讀取 Render 環境變數；若沒有讀到，則使用引號內的備用值
+SUPABASE_URL = os.environ.get("SUPABASE_URL") or "https://你的專案ID.supabase.co"
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY") or "你的SUPABASE_ANON_KEY"
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
