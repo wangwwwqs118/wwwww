@@ -4,16 +4,15 @@ from supabase import create_client, Client
 
 app = Flask(__name__)
 
-# 請填入你的 Supabase 連線資訊
-SUPABASE_URL = "https://hkgvyjluqhnvwhjgjlza.supabase.co"
-SUPABASE_KEY = "sb_publishable_jTGKCg5Fd3rm1w9GYZ9USw_0N5EZNVe"
+# 從 Render 環境變數讀取金鑰
+SUPABASE_URL = os.environ.get("https://hkgvyjluqhnvwhjgjlza.supabase.co")
+SUPABASE_KEY = os.environ.get("sb_publishable_jTGKCg5Fd3rm1w9GYZ9USw_0N5EZNVe")
+
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 @app.route('/')
 def index():
     query = supabase.table('products').select('*')
-    
-    # 接收前台傳遞的分類與搜尋關鍵字
     category = request.args.get('category')
     search = request.args.get('search')
     
