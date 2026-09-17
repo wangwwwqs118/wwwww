@@ -4,9 +4,9 @@ from supabase import create_client, Client
 
 app = Flask(__name__)
 
-# 優先讀取 Render 環境變數；若沒有讀到，則使用引號內的備用值
-SUPABASE_URL = os.environ.get("SUPABASE_URL") or "https://hkgvyjluqhnvwhjgjlza.supabase.co"
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY") or "sb_publishable_jTGKCg5Fd3rm1w9GYZ9USw_0N5EZNVe"
+# 直接將你的真實 URL 與 anon key 貼入引號內（替換下方範例內容）
+SUPABASE_URL = "https://你的專案ID.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.你的完整超長金鑰內容..."
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
